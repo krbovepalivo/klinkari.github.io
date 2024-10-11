@@ -261,6 +261,23 @@
     });
 
 
+	if(localStorage.getItem('productsCache') === null) {
+		fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQKXZApxXbh_gUDCZSyfZxIdmp-p_05_ERpo3vqNYLHFfzIkPbW3LTHXGm29sp5OTGrksCHd9tKctVr/pub?output=csv')
+			.then(response => response.text())
+			.then(csvData => {
+				const products = Papa.parse(csvData, {header: true})
+				localStorage.setItem('productsCache', JSON.stringify(products));
+			})
+			.catch(error => console.error('Error fetching CSV:', error));
+	}
+
+	const cachedProducts = JSON.parse(localStorage.getItem('productsCache')).data
+	window.groupedProducts = [];
+	for (let i = 0; i < cachedProducts.length; i += 3) {
+		const chunk = cachedProducts.slice(i, i + 3);
+		groupedProducts.push(chunk);
+	}
+	console.log(groupedProducts)
 
 
 })(jQuery);

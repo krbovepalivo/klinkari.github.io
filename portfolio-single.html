@@ -92,54 +92,7 @@
 		<div class="basic-portfolio-area ptb-90">
 			<div class="container">
 				<h2>Katalog produktů</h2>
-				<div class="row">
-					<div class="col-md-4 blog-item mb-40">
-						<div class="blog-wrapper blog-column">
-							<div class="blog-thumb">
-									<img src="img/products/1.jpg" alt="" />
-							</div>
-							<div class="blog-desc">
-								<div class="blog-content">
-									<h2 class="blog-title">
-										100 ks
-									</h2>
-									<p>At tincidunt vulputate dis natoque parturient proine mperdiet. Quisque lig pede males us. Semper orc gue lorem
-										ipsum.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 blog-item mb-40">
-						<div class="blog-wrapper blog-column">
-							<div class="blog-thumb">
-									<img src="img/products/2.jpg" alt="" />
-							</div>
-							<div class="blog-desc">
-								<div class="blog-content">
-									<h2 class="blog-title">
-										250 ks
-									</h2>
-									<p>At tincidunt vulputate dis natoque parturient proine mperdiet. Quisque lig pede males us. Semper orc gue lorem ipsum.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 blog-item mb-40">
-						<div class="blog-wrapper blog-column">
-							<div class="blog-thumb">
-									<img src="img/products/3.jpg" alt="" />
-							</div>
-							<div class="blog-desc">
-								<div class="blog-content">
-									<h2 class="blog-title">
-										14 ks
-									</h2>
-									<p>At tincidunt vulputate dis natoque parturient proine mperdiet. Quisque lig pede males us. Semper orc gue lorem ipsum.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<div id="productsContainer"></div>
 			</div>
 		</div>
 		<!-- basic-blog-area end -->
@@ -184,5 +137,46 @@
         <script src="js/jquery.meanmenu.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+	<script>
+		function renderProducts() {
+			const productsContainer = document.getElementById('productsContainer');
+			productsContainer.innerHTML = ''; // Clear existing content
+
+			groupedProducts.forEach(group => {
+				// Create a new row for each group of three products
+				const rowDiv = document.createElement('div');
+				rowDiv.className = 'row';
+
+				// Iterate over each product in the group and create the corresponding HTML
+				group.forEach(product => {
+					const colDiv = document.createElement('div');
+					colDiv.className = 'col-md-4 blog-item mb-40';
+
+					colDiv.innerHTML = `
+        <div class="blog-wrapper blog-column">
+          <div class="blog-thumb">
+            <img src="${product.Obrázek}" alt="${product.Název}" />
+          </div>
+          <div class="blog-desc">
+            <div class="blog-content">
+              <h2 class="blog-title">${product.Název}</h2>
+              <p>${product.Popis}</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+					// Append the product column to the row
+					rowDiv.appendChild(colDiv);
+				});
+
+				// Append the row to the products container
+				productsContainer.appendChild(rowDiv);
+			});
+		}
+
+		// Call the function to render the products
+		renderProducts();
+	</script>
     </body>
 </html>
