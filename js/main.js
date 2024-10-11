@@ -262,6 +262,7 @@
 
 
 	window.groupedProducts = [];
+
 	if(localStorage.getItem('productsCache') === null) {
 		console.log("empty, fetching")
 		fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQKXZApxXbh_gUDCZSyfZxIdmp-p_05_ERpo3vqNYLHFfzIkPbW3LTHXGm29sp5OTGrksCHd9tKctVr/pub?output=csv')
@@ -282,6 +283,7 @@
 
 
 	}
+	window.favoriteProducts = groupedProducts.flat().filter((pr) => pr["Oblíbené"]).slice(0, 3)
 
 
 })(jQuery);
