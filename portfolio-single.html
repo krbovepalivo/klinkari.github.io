@@ -137,46 +137,47 @@
         <script src="js/jquery.meanmenu.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-	<script>
-		function renderProducts() {
-			const productsContainer = document.getElementById('productsContainer');
-			productsContainer.innerHTML = ''; // Clear existing content
 
-			groupedProducts.forEach(group => {
-				// Create a new row for each group of three products
-				const rowDiv = document.createElement('div');
-				rowDiv.className = 'row';
+		<script>
+			function renderProducts() {
+				const productsContainer = document.getElementById('productsContainer');
+				productsContainer.innerHTML = ''; // Clear existing content
 
-				// Iterate over each product in the group and create the corresponding HTML
-				group.forEach(product => {
-					const colDiv = document.createElement('div');
-					colDiv.className = 'col-md-4 blog-item mb-40';
+				groupedProducts.forEach(group => {
+					// Create a new row for each group of three products
+					const rowDiv = document.createElement('div');
+					rowDiv.className = 'row';
 
-					colDiv.innerHTML = `
-        <div class="blog-wrapper blog-column">
-          <div class="blog-thumb">
-            <img src="${product.Obrázek}" alt="${product.Název}" />
-          </div>
-          <div class="blog-desc">
-            <div class="blog-content">
-              <h2 class="blog-title">${product.Název}</h2>
-              <p>${product.Popis}</p>
-            </div>
-          </div>
-        </div>
-      `;
+					// Iterate over each product in the group and create the corresponding HTML
+					group.forEach(product => {
+						const colDiv = document.createElement('div');
+						colDiv.className = 'col-md-4 blog-item mb-40';
 
-					// Append the product column to the row
-					rowDiv.appendChild(colDiv);
+						colDiv.innerHTML = `
+							<div class="blog-wrapper blog-column">
+							  <div class="blog-thumb">
+								<img src="${product.Obrázek}" alt="${product.Název}" />
+							  </div>
+							  <div class="blog-desc">
+								<div class="blog-content">
+								  <h2 class="blog-title">${product.Název}</h2>
+								  <p>${product.Popis}</p>
+								</div>
+							  </div>
+							</div>
+						  `;
+
+						// Append the product column to the row
+						rowDiv.appendChild(colDiv);
+					});
+
+					// Append the row to the products container
+					productsContainer.appendChild(rowDiv);
 				});
+			}
 
-				// Append the row to the products container
-				productsContainer.appendChild(rowDiv);
-			});
-		}
-
-		// Call the function to render the products
-		renderProducts();
-	</script>
+			// Call the function to render the products
+			renderProducts();
+		</script>
     </body>
 </html>
