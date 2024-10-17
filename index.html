@@ -106,53 +106,9 @@
 					<p>Tyto produkty u nás lidé nakupují nejčastěji:</p>
 				</div>
 				<div class="row">
-					<div class="col-md-4 blog-item mb-40">
-						<div class="blog-wrapper blog-column">
-							<div class="blog-thumb">
-									<img src="img/products/1.jpg" alt="" />
-							</div>
-							<div class="blog-desc">
-								<div class="blog-content">
-									<h2 class="blog-title">
-										100 ks
-									</h2>
-									<p>At tincidunt vulputate dis natoque parturient proine mperdiet. Quisque lig pede males us. Semper orc gue lorem
-										ipsum.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 blog-item mb-40">
-						<div class="blog-wrapper blog-column">
-							<div class="blog-thumb">
-									<img src="img/products/2.jpg" alt="" />
-							</div>
-							<div class="blog-desc">
-								<div class="blog-content">
-									<h2 class="blog-title">
-										250 ks
-									</h2>
-									<p>At tincidunt vulputate dis natoque parturient proine mperdiet. Quisque lig pede males us. Semper orc gue lorem ipsum.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 blog-item mb-40">
-						<div class="blog-wrapper blog-column">
-							<div class="blog-thumb">
-									<img src="img/products/3.jpg" alt="" />
-							</div>
-							<div class="blog-desc">
-								<div class="blog-content">
-									<h2 class="blog-title">
-										14 ks
-									</h2>
-									<p>At tincidunt vulputate dis natoque parturient proine mperdiet. Quisque lig pede males us. Semper orc gue lorem ipsum.</p>
-								</div>
-							</div>
-						</div>
-					</div>
+					<div id="favoriteProductsContainer"></div>
 				</div>
+
 				<div style="text-align: center;"><a class="btn" href="./produkty.html">Zobrazit všechny výrobky</a></div>
 			</div>
 		</div>
@@ -193,5 +149,39 @@
         <script src="js/plugins.js"></script>
 		<script src="js/papaparse.min.js.js"></script>
         <script src="js/main.js"></script>
+
+		<script>
+			function renderFavoriteProducts() {
+				const productsContainer = document.getElementById('favoriteProductsContainer');
+				productsContainer.innerHTML = ''; // Clear existing content
+
+				favoriteProducts.forEach(product => {
+					const colDiv = document.createElement('div');
+					colDiv.className = 'col-md-4 blog-item mb-40';
+
+					colDiv.innerHTML = `
+						<div class="blog-wrapper blog-column">
+							<div class="blog-thumb">
+									<img src="./img/products/${product.Obrázek}.jpg" alt="${product.Název}" />
+							</div>
+							<div class="blog-desc">
+								<div class="blog-content">
+									<h2 class="blog-title">
+										${product.Název}, ${product.Rozměr}
+									</h2>
+									<p>${product.Popis}</p>
+								</div>
+							</div>
+						</div>
+					  `;
+
+					// Append the product column to the row
+					productsContainer.appendChild(colDiv);
+				});
+			}
+
+			// Call the function to render the products
+			renderFavoriteProducts();
+		</script>
     </body>
 </html>

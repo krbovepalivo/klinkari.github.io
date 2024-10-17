@@ -262,19 +262,20 @@
 
 
 	window.groupedProducts = [];
+	const cacheKey = 'productsCacheV3'
 
-	if(localStorage.getItem('productsCacheV2') === null) {
+	if(localStorage.getItem(cacheKey) === null) {
 		console.log("empty, fetching")
 		fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQKXZApxXbh_gUDCZSyfZxIdmp-p_05_ERpo3vqNYLHFfzIkPbW3LTHXGm29sp5OTGrksCHd9tKctVr/pub?output=csv')
 			.then(response => response.text())
 			.then(csvData => {
 				const products = Papa.parse(csvData, {header: true})
-				localStorage.setItem('productsCacheV2', JSON.stringify(products));
+				localStorage.setItem(cacheKey, JSON.stringify(products));
 				location.reload()
 			})
 			.catch(error => console.error('Error fetching CSV:', error));
 	} else {
-		const cachedProducts = JSON.parse(localStorage.getItem('productsCacheV2')).data
+		const cachedProducts = JSON.parse(localStorage.getItem(cacheKey)).data
 		for (let i = 0; i < cachedProducts.length; i += 3) {
 			const chunk = cachedProducts.slice(i, i + 3);
 			groupedProducts.push(chunk);
