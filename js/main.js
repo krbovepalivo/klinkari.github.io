@@ -262,7 +262,7 @@
 
 
 	window.groupedProducts = [];
-	const cacheKey = 'productsCacheV3'
+	const cacheKey = 'productsCacheV4'
 
 	if(localStorage.getItem(cacheKey) === null) {
 		console.log("empty, fetching")
